@@ -1,9 +1,11 @@
 var express = require('express');
+var fs = require("fs");
 
 var app = express.createServer(express.logger());
+var filecontent = fs.readFile(index.html);
 
 app.get('/', function(request, response) {
-  response.send('Venkat Showts----Hello World-2!');
+  response.send(filecontent);
 });
 
 var port = process.env.PORT || 5000;
