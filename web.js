@@ -1,14 +1,8 @@
-var express = require('express');
-var fs = require("fs");
+var http = require('http');
+var fs = require('fs');
+var index = fs.readFileSync('index.html');
 
-var app = express.createServer(express.logger());
-var filecontent = fs.readFile(index.html);
-
-app.get('/', function(request, response) {
-  response.send(filecontent);
-});
-
-var port = process.env.PORT || 5000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  res.end(index);
+}).listen(5000);
