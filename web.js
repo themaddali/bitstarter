@@ -9,5 +9,5 @@ http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'});
   res.end(index);
   console.log("call heard");
-}).listen(5000);
-console.log("Running on port 5000");
+}).listen(process.env.PORT || 5000)
+console.log("Running on port 5000 in local env or on heroku");
