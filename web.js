@@ -1,13 +1,15 @@
 var express = require('express');
+var fs = require('fs');
+var htmlfile = "index.html";
+
 var app = express.createServer(express.logger());
 
-var http = require('http');
-var fs = require('fs');
-var index = fs.readFileSync('index.html');
+app.get('/', function(request, response) {
+	var html = fs.readFileSync(htmlfile).toString();
+	response.send(html);
+});
 
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  res.end(index);
-  console.log("call heard");
-}).listen(process.env.PORT || 5000)
-console.log("Running on port 5000 in local env or on heroku! Venkat");
+var port = process.env.PORT || 8080;
+app.listen(port, function() {
+	console.log("Listening on 8080 in local or Heroku");
+});
